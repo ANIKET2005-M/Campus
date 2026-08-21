@@ -1,0 +1,17 @@
+Aniket Maharana
+Email: aniket.m@campus.edu
+Phone: 9876543210
+Education:
+B.Tech in Computer Science and Engineering, 2026
+CGPA: 8.9
+
+Skills:
+React, JavaScript, Python, SQL, Git, HTML, CSS
+
+Projects:
+1. Campus Placement Management System
+Built using React, Node.js, and SQL. A platform for streamlining placements.
+Link: https://github.com/aniket/campus-placement
+
+2. AI Voice Assistant
+Developed Python based voice recognition system.

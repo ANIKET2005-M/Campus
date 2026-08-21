@@ -1,0 +1,6 @@
+{
+  "name": "Campus Placement Management System",
+  "description": "Streamlined campus recruitment and placement management platform connecting students, recruiters, and placement officers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

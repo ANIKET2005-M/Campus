@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.vite/
+
+.env
+.env.local
+
+data/db.json
+data/db.json.bak
+data/resumes/
+
+*.log
