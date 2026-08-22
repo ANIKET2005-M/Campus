@@ -68,22 +68,44 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ setActiveTab
 
   // Get upcoming calendar events
   const studentUpcomingEvents = useMemo(() => {
-    return (placementEvents || [])
-      .filter(event => {
-        // Must be approved (or student's own reminder)
-        if (event.approvalStatus !== 'Approved' && event.userId !== currentUser?.id) return false;
-        // Check eligibility
-        if (event.eventType !== 'Personal Reminder' && event.eligibleStudentIds && event.eligibleStudentIds.length > 0) {
-          if (event.eligibleStudentIds[0] !== 'all' && !event.eligibleStudentIds.includes(currentStudent.id)) {
-            return false;
-          }
+  if (!currentStudent) return [];
+
+  return (placementEvents || [])
+    .filter(event => {
+      // Must be approved (or student's own reminder)
+      if (
+        event.approvalStatus !== 'Approved' &&
+        event.userId !== currentUser?.id
+      ) {
+        return false;
+      }
+
+      // Check eligibility
+      if (
+        event.eventType !== 'Personal Reminder' &&
+        event.eligibleStudentIds &&
+        event.eligibleStudentIds.length > 0
+      ) {
+        if (
+          event.eligibleStudentIds[0] !== 'all' &&
+          !event.eligibleStudentIds.includes(currentStudent.id)
+        ) {
+          return false;
         }
-        // Exclude past events (relative to Aug 16, 2026)
-        return new Date(event.date) >= new Date('2026-08-16');
-      })
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime() || a.startTime.localeCompare(b.startTime))
-      .slice(0, 3);
+      }
+
+      // Exclude past events
+      return new Date(event.date) >= new Date('2026-08-16');
+    })
+    .sort(
+      (a, b) =>
+        new Date(a.date).getTime() - new Date(b.date).getTime() ||
+        a.startTime.localeCompare(b.startTime)
+    )
+    .slice(0, 3);
   }, [placementEvents, currentStudent, currentUser]);
+
+  if (!currentStudent) return null;
 
   return (
     <div className="space-y-8 max-w-6xl">
