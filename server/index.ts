@@ -518,6 +518,22 @@ app.get('/api/test-pdf-parse', async (req: Request, res: Response) => {
   }
 });
 
+// Serve React frontend
+const DIST_DIR = path.resolve(process.cwd(), 'dist');
+
+console.log("[Frontend] DIST_DIR:", DIST_DIR);
+console.log(
+  "[Frontend] index.html exists:",
+  fs.existsSync(path.join(DIST_DIR, "index.html"))
+);
+
+app.use(express.static(DIST_DIR));
+
+app.get("/", (_req: Request, res: Response) => {
+  console.log("[Frontend] GET /");
+  res.sendFile(path.join(DIST_DIR, "index.html"));
+});
+
 // Start listening
 server.listen(PORT, () => {
   console.log(`[CampusPlacement Backend] Running on http://localhost:${PORT}`);
